@@ -1,0 +1,121 @@
+[gd_scene format=3 uid="uid://b0cwehoqbwns6"]
+
+[ext_resource type="Script" uid="uid://byp3325qrwuuh" path="res://Scenes/entities/Player.cs" id="1_rd5lp"]
+[ext_resource type="Texture2D" uid="uid://bkspds86sfuny" path="res://课程素材/graphics/characters/player.png" id="2_br7jp"]
+[ext_resource type="Texture2D" uid="uid://cainbt74v7pbq" path="res://课程素材/graphics/ui/crosshair.png" id="3_pegit"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_in2m2"]
+radius = 6.0
+
+[sub_resource type="Animation" id="Animation_pegit"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("leg:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [15]
+}
+
+[sub_resource type="Animation" id="Animation_br7jp"]
+resource_name = "idel"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("leg:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [16]
+}
+
+[sub_resource type="Animation" id="Animation_h51i4"]
+resource_name = "jump"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("leg:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [17]
+}
+
+[sub_resource type="Animation" id="Animation_amhbr"]
+resource_name = "run"
+length = 1.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("leg:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [9, 10, 11, 12, 13, 14, 15, 16]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h51i4"]
+_data = {
+&"RESET": SubResource("Animation_pegit"),
+&"idle": SubResource("Animation_br7jp"),
+&"jump": SubResource("Animation_h51i4"),
+&"run": SubResource("Animation_amhbr")
+}
+
+[node name="player" type="CharacterBody2D" unique_id=886019080]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_rd5lp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=499817907]
+shape = SubResource("CapsuleShape2D_in2m2")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=161393417]
+offset = Vector2(0, -100)
+zoom = Vector2(1.5, 1.5)
+limit_left = -80
+limit_top = 0
+limit_right = 1952
+limit_bottom = 784
+
+[node name="leg" type="Sprite2D" parent="." unique_id=1716497007]
+position = Vector2(0, -7)
+texture = ExtResource("2_br7jp")
+hframes = 8
+vframes = 3
+frame = 15
+
+[node name="torso" type="Sprite2D" parent="." unique_id=1574064307]
+position = Vector2(0, -7)
+texture = ExtResource("2_br7jp")
+hframes = 8
+vframes = 3
+
+[node name="cross" type="Sprite2D" parent="." unique_id=1284650372]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_pegit")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1695819988]
+libraries/ = SubResource("AnimationLibrary_h51i4")
+autoplay = &"idle"
+
+[node name="shootTimer" type="Timer" parent="." unique_id=1274935423]
+wait_time = 0.5
+one_shot = true

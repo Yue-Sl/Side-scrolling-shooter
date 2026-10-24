@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bvm34po2xdk8u"]
+
+[ext_resource type="Texture2D" uid="uid://220oixunvlyq" path="res://课程素材/graphics/fire/default.png" id="1_bbile"]
+[ext_resource type="Script" uid="uid://25v376kaqrem" path="res://Scenes/entities/Bullet.cs" id="1_h8kkg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_in2m2"]
+size = Vector2(4.5146866, 1.0357028)
+
+[node name="bullet" type="Area2D" unique_id=1169905329]
+collision_layer = 8
+collision_mask = 5
+script = ExtResource("1_h8kkg")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=313201758]
+texture = ExtResource("1_bbile")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=593631925]
+rotation = -3.1415925
+scale = Vector2(0.5426875, 1.8873701)
+shape = SubResource("RectangleShape2D_in2m2")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1443886079]
+scale = Vector2(0.35999787, 0.15999949)

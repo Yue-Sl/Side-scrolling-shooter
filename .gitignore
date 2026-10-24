@@ -1,0 +1,18 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Godot
+.godot/
+export.cfg
+export_presets.cfg
+
+# .NET / C#
+bin/
+obj/
+*.csproj.user
+
+# 其他
+.DS_Store
+Thumbs.db
